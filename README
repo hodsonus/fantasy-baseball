@@ -1,0 +1,6 @@
+I created this script because I was sick of constantly ripping the player list by hand in my dynasty fantasy baseball league.
+This script uses BeautifulSoup, Mechanize, and Pandas to rip and generate a player list from Yahoo Fantasy Sports.
+
+The excel spreadsheet allows me to import my own ranks and further analyze the availabel players with resources outside of Yahoo.
+
+Create a config.py file, and configure it as direted in the file. Then run the code with 'python3 ripper.py'.
