@@ -32,6 +32,41 @@ response = br.submit()
 time.sleep(.5)
 print('Logged in!')
 
+# Rip batters
+
+i=1
+while (True): # rip player data until we hit the break statement
+
+    html_scrape = response.read()
+    soup = bs4.BeautifulSoup(html_scrape, "lxml")
+
+    # with open("out"+str(i)+".html", "w") as text_file:
+    #     text_file.write(str(soup))
+
+    print('Processing page ',i,'.',sep="")
+    i+=1
+
+    players = soup.find_all('div', {'class':'ysf-player-name Nowrap Grid-u Relative Lh-xs Ta-start'})
+    for player in players:
+        name = player.find('a').get_text()
+        team_pos_str = player.find('span').get_text()
+        team_pos_lis = re.split(' - ',team_pos_str)
+        team = team_pos_lis[0]
+        pos = team_pos_lis[1]
+        player_info+=[(name,team,pos)]
+
+    links = br.links(text_regex='Next 25')
+    link = next(links,None)
+    if (link == None):
+            break
+    response = br.follow_link(link)
+    time.sleep(.5)
+
+# Rip pitchers
+newurl = 'https://baseball.fantasysports.yahoo.com/b1/'+str(league_id)+'/players?&sort=OR&sdir=1&status=A&pos=P&stat1=S_S_2019&jsenabled=1'
+br.open(newurl)
+time.sleep(.5)
+
 i=1
 while (True): # rip player data until we hit the break statement
 
