@@ -8,6 +8,8 @@ import bs4
 username = config.credentials['yahoo_email']
 password = config.credentials['yahoo_password']
 league_id = config.credentials['yahoo_league_id']
+sport = config.credentials['sport']
+sport_prefix = sport[0]
 
 player_info = []
 
@@ -16,7 +18,7 @@ br.set_handle_robots(False)
 br.addheaders = [('User-agent', 'Mozilla/5.0 (Windows; U; Windows NT 6.0; en-US; rv:1.9.0.6')]
 
 print('Logging in.')
-url = 'https://login.yahoo.com/config/login;_ylt=AwrGB7pqzTxUF9oAigC3cJ8u?.src=fantasy&.intl=us&.lang=en-US&.done=http://baseball.fantasysports.yahoo.com/b1/'+str(league_id)+'/players'
+url = f'https://login.yahoo.com/config/login;_ylt=AwrGB7pqzTxUF9oAigC3cJ8u?.src=fantasy&.intl=us&.lang=en-US&.done=http://{sport}.fantasysports.yahoo.com/{sport_prefix}1/{league_id}/players'
 br.open(url)
 time.sleep(.5)
 
